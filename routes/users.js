@@ -12,7 +12,6 @@ import { createUserTrophies } from "../controllers/usertrophies.js";
 import { check, validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import config from "config";
 import User from "../models/user.js";
 import gravatar from "gravatar";
 
@@ -96,7 +95,7 @@ router.post(
       };
       jwt.sign(
         payload,
-        config.get("jwtSecret"),
+        process.env.JWTSECRET,
         { expiresIn: 36000 },
         (err, token) => {
           if (err) throw err;
